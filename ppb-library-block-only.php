@@ -30,11 +30,27 @@ add_action( 'boldgrid_editor_scripts_builder', function() {
 		.boldgrid-gridblock-categories option[value='library'] {
 			display: block;
 		}
+
+		.select-to-start {
+			background: #fff;
+			padding: 2em;
+			margin: 2em auto;
+		}
+
+		.boldgrid-zoomout-section .gridblocks[filter='saved'] .select-to-start,
+		.boldgrid-zoomout-section .gridblocks[filter='library'] .select-to-start {
+			display: none;
+		}
 	" );
 
 	wp_add_inline_script( 'boldgrid-editor-drag', "
 		if ( BOLDGRID && BOLDGRID.EDITOR ) {
 			BOLDGRID.EDITOR.GRIDBLOCK.Category.currentCategory = 'library';
 		}
+
+		jQuery( function () {
+			var content = jQuery( '<div class=\'select-to-start\'>Please select a block type to start.</div>' );
+			jQuery( '.boldgrid-zoomout-section .gridblocks' ).append( content );
+		} );
 	" );
 } );
